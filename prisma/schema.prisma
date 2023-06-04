@@ -11,8 +11,17 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  name String
-  
+  id      String  @id @default(uuid())
+  name    String
+  isAdmin Boolean
+  posts   Post[]
+}
 
+model Post {
+  id String @id @default(uuid())
+  author    User     @relation(fields: [authorId], references: [id])
+  rating    Float
+  createdAt DateTime
+  updatedAt DateTime
+  authorId  String
 }
